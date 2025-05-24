@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saudi Events - Login</title>
+  <meta name="description" content="Login to your Saudi Events account" />
+  <meta name="author" content="Saudi Events" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="stylesheet" href="log.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body class="login-page">
+  <div class="login-container">
+    <div class="logo">
+      <i class="fas fa-calendar-alt"></i>
+      <span>Saudi Events</span>
+    </div>
+
+    <div class="login-box">
+      <h2>Login to Your Account</h2>
+      <div class="user-type-tabs">
+        <button class="tab-btn active" data-type="attendee">Attendee</button>
+        <button class="tab-btn" data-type="organizer">Event Organizer</button>
+      </div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" placeholder="Enter your email" required />
+        </div>
+        <div class="form-group password-field">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="Enter your password" required />
+          <div class="password-toggle">
+            <i class="fas fa-eye" id="toggle-password" aria-label="Show password"></i>
+          </div>
+        </div>
+        <div class="form-group company-field" style="display: none;">
+          <label for="company-id">Company ID</label>
+          <input type="text" id="company-id" placeholder="Enter your company ID" />
+        </div>
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox" id="remember-me" /> Remember me
+          </label>
+          <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+      </form>
+
+      <p class="register-text">Don't have an account? <a href="#" id="register-link">Register</a></p>
+    </div>
+  </div>
+
+  <!-- Register Modal -->
+  <div id="register-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close" onclick="document.getElementById('register-modal').style.display='none'">&times;</span>
+      <h2>Create an Account</h2>
+      <div class="user-type-tabs register-tabs">
+        <button class="tab-btn active" data-type="attendee-reg">Attendee</button>
+        <button class="tab-btn" data-type="organizer-reg">Organizer</button>
+      </div>
+
+      <form id="register-form">
+        <div class="form-group"><label for="register-name">Name</label><input type="text" id="register-name" required></div>
+        <div class="form-group"><label for="register-email">Email</label><input type="email" id="register-email" required></div>
+        <div class="form-group"><label for="register-password">Password</label><input type="password" id="register-password" required></div>
+
+        <div class="attendee-fields">
+          <label><input type="checkbox" id="terms-checkbox" /> I agree to the terms</label>
+        </div>
+
+        <div class="organizer-fields" style="display: none;">
+          <div class="form-group"><label for="company-name">Company Name</label><input type="text" id="company-name"></div>
+          <div class="form-group"><label for="company-location">Company Location</label><input type="text" id="company-location"></div>
+          <div class="form-group"><label for="company-license">Company License</label><input type="text" id="company-license"></div>
+          <div class="form-group"><label for="company-description">Company Description</label><textarea id="company-description"></textarea></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Register</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const loginForm = document.getElementById('login-form');
+      const registerLink = document.getElementById('register-link');
+      const togglePassword = document.getElementById('toggle-password');
+      const companyField = document.querySelector('.company-field');
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      let currentUserType = 'attendee';
+
+      // Switch login type
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const type = this.getAttribute('data-type');
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+
+          if (type.includes('organizer')) {
+            currentUserType = 'organizer';
+            companyField.style.display = 'block';
+          } else {
+            currentUserType = 'attendee';
+            companyField.style.display = 'none';
+          }
+        });
+      });
+
+      togglePassword.addEventListener('click', function () {
+        const passwordInput = document.getElementById('login-password');
+        passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+        this.classList.toggle('fa-eye-slash');
+      });
+
+      loginForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('login-password').value.trim();
+        const companyId = document.getElementById('company-id').value.trim();
+
+        if (!email || !password) return showToast('Please fill in all fields', 'error');
+        if (currentUserType === 'organizer' && !companyId) return showToast('Please enter your company ID', 'error');
+
+        fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, userType: currentUserType })
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userType', data.userType);
+            localStorage.setItem('userId', data.userId);
+            showToast(data.message, 'success');
+            setTimeout(() => {
+              window.location.href = data.userType === 'organizer' ? 'organizer-dashboard.html' : 'index.html';
+            }, 1500);
+          } else {
+            showToast(data.message, 'error');
+          }
+        })
+        .catch(() => showToast('Login failed due to network error', 'error'));
+      });
+
+      registerLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('register-modal').style.display = 'block';
+      });
+
+      const registerForm = document.getElementById('register-form');
+      let registerType = 'attendee';
+
+      const regTabs = document.querySelectorAll('.register-tabs .tab-btn');
+      regTabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+          regTabs.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          registerType = btn.getAttribute('data-type').includes('organizer') ? 'organizer' : 'attendee';
+          document.querySelector('.attendee-fields').style.display = registerType === 'attendee' ? 'block' : 'none';
+          document.querySelector('.organizer-fields').style.display = registerType === 'organizer' ? 'block' : 'none';
+        });
+      });
+
+      registerForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const name = document.getElementById('register-name').value.trim();
+        const email = document.getElementById('register-email').value.trim();
+        const password = document.getElementById('register-password').value.trim();
+        if (!name || !email || !password) return showToast('All fields are required', 'error');
+        if (registerType === 'attendee' && !document.getElementById('terms-checkbox').checked) return showToast('Please accept the terms', 'error');
+
+        const data = { email, password, userType: registerType };
+        if (registerType === 'organizer') {
+          data.companyName = document.getElementById('company-name').value;
+          data.companyLocation = document.getElementById('company-location').value;
+          data.companyLicense = document.getElementById('company-license').value;
+          data.companyDescription = document.getElementById('company-description').value;
+        }
+
+        fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(response => {
+          if (response.success) {
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userType', registerType);
+            localStorage.setItem('userId', response.user._id);
+            showToast('Registration successful!', 'success');
+            document.getElementById('register-modal').style.display = 'none';
+            setTimeout(() => {
+              window.location.href = registerType === 'organizer' ? 'organizer-dashboard.html' : 'index.html';
+            }, 1500);
+          } else {
+            showToast(response.message || 'Registration failed', 'error');
+          }
+        })
+        .catch(err => {
+          console.error('Registration error:', err);
+          showToast('Registration failed', 'error');
+        });
+      });
+
+      function showToast(message, type) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = `toast show ${type}`;
+        setTimeout(() => toast.classList.remove('show'), 3000);
+      }
+    });
+  </script>
+</body>
+</html>

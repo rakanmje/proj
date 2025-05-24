@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Company Dashboard - Events</title>
+  <link rel="stylesheet" href="as.css">
+</head>
+<body>
+  <div class="container">
+    <section class="profile">
+      <img src="https://via.placeholder.com/100" alt="Company Logo" class="company-img">
+      <div class="company-info">
+        <h2>Company Name</h2>
+        <p>Brief description about the company and its activities.</p>
+      </div>
+    </section>
+
+    <section class="events-section">
+      <div class="events-header">
+        <h3>Events</h3>
+        <button class="add-btn" onclick="openForm()">+</button>
+      </div>
+      <ul id="events-list" class="events-list">
+      </ul>
+    </section>
+  </div>
+
+  <div id="event-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3 id="modal-title">Add Event</h3>
+      <input type="text" id="event-name" placeholder="Event Name">
+      <input type="text" id="event-location" placeholder="Location">
+      <input type="datetime-local" id="event-date">
+      <input type="number" id="event-seats" placeholder="Available Seats">
+      <textarea id="event-description" placeholder="Event Description"></textarea>
+      <div class="modal-actions">
+        <button onclick="saveEvent()">Save</button>
+        <button onclick="closeForm()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+
+<script src="script.js"></script>
+</body>
+</html>

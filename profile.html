@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile | Saudi Events</title>
+  <link rel="stylesheet" href="./styles/profile.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>User Profile</h1>
+
+    <div class="profile-container">
+      <div class="profile-picture">
+        <img src="https://via.placeholder.com/150" alt="User Profile Picture" />
+        <button class="btn" id="change-photo-btn"><i class="fas fa-camera"></i> Change Photo</button>
+      </div>
+
+      <div class="profile-info">
+        <h2 id="user-name">Loading...</h2>
+        <p id="user-bio">Loading bio...</p>
+
+        <div class="profile-stats">
+          <div class="stat-box">
+            <div class="stat-number" id="events-attended">0</div>
+            <div class="stat-label">Events Attended</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number" id="years-member">0</div>
+            <div class="stat-label">Years as Member</div>
+          </div>
+        </div>
+
+        <div class="profile-tabs">
+          <button class="tab-button active" data-tab="upcoming">Upcoming Events</button>
+          <button class="tab-button" data-tab="past">Past Events</button>
+          <button class="tab-button" data-tab="saved">Saved Events</button>
+          <button class="tab-button" data-tab="settings">Account Settings</button>
+        </div>
+
+        <div class="tab-content" id="upcoming-tab">
+          <h3>Your Upcoming Events</h3>
+          <div class="events-list" id="upcoming-events"></div>
+        </div>
+
+        <div class="tab-content" id="past-tab" style="display: none;">
+          <h3>Your Past Events</h3>
+          <div class="events-list" id="past-events"></div>
+        </div>
+
+        <div class="tab-content" id="saved-tab" style="display: none;">
+          <h3>Your Saved Events</h3>
+          <div class="events-list" id="saved-events"></div>
+        </div>
+
+        <div class="tab-content" id="settings-tab" style="display: none;">
+          <h3>Account Settings</h3>
+          <form id="settings-form">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+              <label for="bio">Bio</label>
+              <textarea id="bio" class="form-control" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./scripts/profile.js"></script>
+</body>
+</html>
