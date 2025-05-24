@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Organizer Dashboard</title>
+  <link rel="stylesheet" href="as.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <div class="container">
+    <header class="header">
+      <div class="profile">
+        <img id="company-logo" src="/uploads/default-company.png" alt="Company Logo" class="company-img">
+        <div class="company-info">
+          <h2 id="company-name">Organizer Company</h2>
+          <p id="company-description">Your company description here.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="events-section">
+      <div class="events-header">
+        <h3>Your Events</h3>
+        <button class="add-btn" onclick="openForm()">+</button>
+      </div>
+      <ul id="events-list" class="event-grid">
+        <!-- Event cards rendered here -->
+      </ul>
+    </section>
+  </div>
+
+  <!-- Modal for Add/Edit Event -->
+  <div id="event-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3 id="modal-title">Add Event</h3>
+      <input type="text" id="event-name" placeholder="Event Name">
+      <input type="text" id="event-location" placeholder="Location">
+      <input type="datetime-local" id="event-date">
+      <input type="number" id="event-seats" placeholder="Available Seats">
+      <input type="number" id="event-price" placeholder="Ticket Price (SAR)">
+      <textarea id="event-description" placeholder="Event Description"></textarea>
+      <select id="event-category" required>
+        <option value="">Select Category</option>
+        <option value="cultural">Cultural</option>
+        <option value="food">Food</option>
+        <option value="nature">Nature</option>
+        <option value="adventure">Adventure</option>
+        <option value="family">Family</option>
+        <option value="sport">Sport</option>
+      </select>
+      <div class="modal-actions">
+        <input type="file" id="event-image" accept="image/*">
+        <button onclick="saveEvent()">Save</button>
+        <button onclick="closeForm()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Edit Company Info -->
+  <div id="company-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Edit Company Info</h3>
+      <input type="text" id="edit-company-name" placeholder="Company Name">
+      <textarea id="edit-company-description" placeholder="Company Description"></textarea>
+      <input type="file" id="edit-company-logo" accept="image/*">
+      <div class="modal-actions">
+        <button onclick="updateCompanyInfo()">Save</button>
+        <button onclick="closeCompanyEdit()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Event Detail Modal (for viewer) -->
+  <div id="event-modal" class="modal">
+    <div class="modal-content event-modal-content">
+      <span class="close" aria-label="Close">&times;</span>
+      <div id="event-details">
+        <!-- Event details will be injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <script src="organizer.js"></script>
+</body>
+</html>

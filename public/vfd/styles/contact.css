@@ -1,0 +1,110 @@
+:root {
+     --primary-color: #4CAF50;
+     --primary-dark: #388E3C;
+     --primary-light: #A5D6A7;
+     --secondary-color: #FFC107;
+     --text-color: #212121;
+     --text-light: #757575;
+     --bg-color: #f5fff5;
+     --white: #ffffff;
+     --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+     --border-radius: 8px;
+   }
+   
+   * {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+   }
+   
+   body {
+     background: var(--bg-color);
+     color: var(--text-color);
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     line-height: 1.6;
+   }
+   
+   .container {
+     background: var(--white);
+     margin: 2rem auto;
+     max-width: 1100px;
+     padding: 2rem;
+     border-radius: var(--border-radius);
+     box-shadow: var(--shadow);
+   }
+   
+   h1, h2, h3, h4, h5, h6 {
+     color: var(--primary-color);
+     margin-bottom: 1rem;
+   }
+   
+   p {
+     margin-bottom: 1rem;
+     line-height: 1.7;
+   }
+   
+   .btn {
+     display: inline-block;
+     background: var(--primary-color);
+     color: var(--white);
+     padding: 0.75rem 1.5rem;
+     text-decoration: none;
+     border: none;
+     border-radius: var(--border-radius);
+     cursor: pointer;
+     transition: all 0.3s ease;
+   }
+   
+   .btn:hover {
+     background: var(--primary-dark);
+     transform: translateY(-2px);
+   }
+.contact-wrapper {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 2rem;
+   }
+   
+   .contact-info {
+     padding: 2rem;
+   }
+   
+   .contact-info-item {
+     display: flex;
+     align-items: center;
+     margin-bottom: 1.5rem;
+   }
+   
+   .contact-info-icon {
+     font-size: 1.5rem;
+     color: var(--primary-color);
+     margin-right: 1rem;
+   }
+   
+   .contact-form {
+     padding: 2rem;
+   }
+   
+   .form-group {
+     margin-bottom: 1.5rem;
+   }
+   
+   .form-control {
+     width: 100%;
+     padding: 0.75rem;
+     border: 1px solid #ddd;
+     border-radius: var(--border-radius);
+     font-size: 1rem;
+   }
+   
+   .form-control:focus {
+     outline: none;
+     border-color: var(--primary-color);
+   }
+   
+   .location-map {
+     height: 300px;
+     border-radius: var(--border-radius);
+     overflow: hidden;
+     margin-top: 2rem;
+   }

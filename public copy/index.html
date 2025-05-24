@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saudi Events - Discover Amazing Events</title>
+    <meta name="description" content="Discover and book tourism events across Saudi Arabia">
+    <meta name="keywords" content="Saudi Arabia, events, tourism, cultural, food, nature, adventure">
+    <meta name="author" content="Saudi Events">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta property="og:title" content="Saudi Events - Discover Amazing Events">
+    <meta property="og:description" content="Discover and book tourism events across Saudi Arabia">
+    <meta property="og:image" content="images/og-image.jpg">
+    <meta property="og:url" content="https://saudievents.com">
+</head>
+<body>
+
+    <header class="sticky-header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Saudi Events</span>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home" aria-current="page"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#events"><i class="fas fa-calendar"></i> Events</a></li>
+                    <li><a href="#categories"><i class="fas fa-tags"></i> Categories</a></li>
+                    <li><a href="#popular"><i class="fas fa-star"></i> Popular</a></li>
+                    <li><a href="./vfd/profile.html"><i class="fas fa-users"></i> profile</a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-info-circle"></i> About <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="./vfd/about.html">About Us</a></li>
+                            <li><a href="./vfd/contact.html">Contact</a></li>
+                            <li><a href="./vfd/faq.html">FAQ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Discover Amazing Events Across Saudi Arabia</h1>
+                <p>Find cultural, food, nature, and adventure events in the Kingdom</p>
+                <div class="hero-buttons">
+                    <a href="#events" class="btn btn-primary"><i class="fas fa-calendar"></i> Browse Events</a>
+                    <a href="#categories" class="btn btn-outline"><i class="fas fa-tags"></i> Explore Categories</a>
+                </div>
+                <div class="search-container">
+                    <div class="search-bar">
+                        <input type="text" id="search-input" placeholder="Search events..." aria-label="Search events">
+                        <select id="location-filter" aria-label="Filter by location">
+                            <option value="">All Locations</option>
+                            <option value="riyadh">Riyadh</option>
+                            <option value="jeddah">Jeddah</option>
+                            <option value="dammam">Dammam</option>
+                            <option value="alula">AlUla</option>
+                            <option value="taif">Taif</option>
+                            <option value="abha">Abha</option>
+                        </select>
+                        <select id="date-filter" aria-label="Filter by date">
+                            <option value="">Any Date</option>
+                            <option value="today">Today</option>
+                            <option value="tomorrow">Tomorrow</option>
+                            <option value="weekend">This Weekend</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                        </select>
+                        <button id="search-btn" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-text">Events</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">20+</span>
+                    <span class="stat-text">Cities</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100k+</span>
+                    <span class="stat-text">Visitors</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="events" class="featured-events">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Featured Events</h2>
+                    <div class="view-all">
+                        <a href="#" id="view-all-events">View All <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="events-grid" id="events-container">
+                    <div class="loading-events">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading events...</p>
+                    </div>
+                </div>
+                <div class="pagination" id="pagination"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Saudi Events</h3>
+                    <p>Discover and book the best tourism events across Saudi Arabia.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Discover</h3>
+                    <ul>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#">Upcoming</a></li>
+                        <li><a href="#">Featured</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="./vfd/about.html">About Us</a></li>
+                        <li><a href="./vfd/team.html">Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="./vfd/faq.html">FAQs</a></li>
+                        <li><a href="./vfd/contact.html">Contact Us</a></li>
+                        <li><a href="./vfd/terms.html">Terms of Service</a></li>
+                        <li><a href="./vfd/privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Riyadh, Saudi Arabia</li>
+                        <li><i class="fas fa-phone"></i> +966 12 345 6789</li>
+                        <li><i class="fas fa-envelope"></i> info@saudievents.com</li>
+                        <li><i class="fas fa-clock"></i> 9AM-6PM, Sun-Thu</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Saudi Events. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="./vfd/privacy.html">Privacy Policy</a>
+                    <a href="./vfd/terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal" id="event-modal" aria-labelledby="event-heading" aria-modal="true" role="dialog">
+        <div class="modal-content event-modal-content">
+            <span class="close" aria-label="Close">&times;</span>
+            <div id="event-details"></div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <div id="cookie-consent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button id="cookie-accept" class="btn btn-sm">Accept</button>
+                <button id="cookie-settings" class="btn btn-sm btn-outline">Settings</button>
+            </div>
+        </div>
+    </div>
+
+<script src="script.js"></script>
+
+
+
+</body>
+</html>
